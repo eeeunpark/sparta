@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+
+        $.ajax({
+            type: "GET",
+            url: "http://openapi.seoul.go.kr:8088/6d4d776b466c656533356a4b4b5872/json/RealtimeCityAir/1/99",
+            data: {},
+            success: function (response) {
+                // 모든 구의 미세먼지 값 가져오
+                let cityAir = response["RealtimeCityAir"]["row"];
+                for (let i = 0; i < cityAir.length; i++) {
+                    let mise = cityAir[i];
+                    let guName = mise["MSRSTE_NM"];
+                    let guMise = mise['PM10'];
+                    console.log(guName, guMise);
+                }
+            },
+        });
+
+    </script>
+</head>
+<body>
+
+
+</body>
+</html>

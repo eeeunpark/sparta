@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://th4.tmon.kr/thumbs/image/a60/d62/920/623b3414b_700x700_95_FIT.jpg"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        .wrapper-top {
+            width: 700px;
+            margin: 0px auto;
+            font-family: 'Black Han Sans', sans-serif;
+        }
+
+        .wrapper-down {
+            width: 700px;
+            margin: auto auto;
+            text-align: center;
+            font-family: 'Nanum Gothic', sans-serif;
+            font-weight: bold;
+        }
+
+        h1, h3 {
+            display: inline;
+        }
+
+        .form-control {
+            width: 647px;
+            font-family: 'Nanum Gothic', sans-serif;
+            font-weight: bold;
+        }
+
+    </style>
+    <title> 오늘 저녁은 백숙이닭!</title>
+    <script>
+        $(document).ready(function () {
+            $.ajax({
+                type: "GET",
+                url: "https://api.manana.kr/exchange/rate.json",
+                data: {},
+                success: function (result) {
+                    const rate = result[1]["rate"]
+                    $("#rate").text(rate)
+                    $("#dollar").text((50000 / rate).toFixed(2))
+                },
+            });
+        })
+
+        function order() {
+            const orderName = $("#order-name").val()
+            const orderCount = $("#order-count option:selected").val()
+            const orderAddress = $("#order-address").val()
+            const orderPhone = $("#order-phone").val()
+            if (orderName === "") {
+                alert("이름을 제대로 입력해주세요.")
+            } else if (orderCount === "") {
+                alert("수량을 제대로 입력해주세요.")
+            } else if (orderAddress === "") {
+                alert("주소를 제대로 입력해주세요.")
+            } else if (orderPhone === "") {
+                alert("전화번호를 제대로 입력해주세요.")
+            } else {
+                alert("주문이 완료되었습니다.")
+            }
+        }
+
+    </script>
+</head>
+<body>
+<div class=wrapper-top>
+    <img src=https://wetown.kr/_img/https://blogthumb.pstatic.net/MjAxOTA4MzBfMTIw/MDAxNTY3MTUzMzA3Mjc0.U3nOCMZ481CVjC6YU506OOxqt_IDIOhn6YNG771AfEAg.F2VyOR6N_mFsfCc5VyryUU7XmeVNh5Rr-q79aPhaldgg.JPEG.yangpyeong63/1.JPG?type=w2
+         width="700px" height="400px">
+    <div>
+        <p>
+        <h1> 백숙 한 상 팝니다!🐔</h1>
+        <h3 style="color: tomato">가격: <span id="dollar"></span>$/ 한 상</h3>
+        <h4 style="color: tomato">달러-원 환율:<span id="rate"></span></h4>
+        </p>
+        <p></p>
+    </div>
+    <div>
+        오늘은 초복! 초복을 맞이해서 치킨도 좋지만 백숙 한 상 어떠세요?
+        국산 토종닭 1마리가 그대로 들어갔으며 마늘 팍팍, 각종 한약재도 팍팍, 부추도 팍팍 넣어 푸욱 끓여드려요!
+        밑반찬도 싹-! 깔아드립니다. 한 입 먹는 순간 JMT 외치게 되실거에요.
+        지금 바로 주문하세요!
+    </div>
+    <p></p>
+</div>
+
+<div class="wrapper-down">
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroup-sizing-default">주문자 성함 </span>
+        </div>
+        <input type="text" class="form-control" id="order-name" aria-label="Sizing example input"
+               aria-describedby="inputGroup-sizing-default">
+    </div>
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <label class="input-group-text">수량</label>
+        </div>
+        <select class="form-control" id="order-count" aria-label="Sizing example input"
+                aria-describedby="inputGroup-sizing-default">
+            <option selected value=""> ---수량을 선택하세요---</option>
+            <option value="1">1마리</option>
+            <option value="2">2마리</option>
+            <option value="3">3마리</option>
+            <option value="4">4마리</option>
+            <option value="5">5마리</option>
+            <option value="6">5마리 이상</option>
+        </select>
+    </div>
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroup-sizing-default"> 주소 </span>
+        </div>
+        <input type="text" class="form-control" id="order-address" aria-label="Sizing example input"
+               aria-describedby="inputGroup-sizing-default">
+    </div>
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroup-sizing-default">전화번호 </span>
+        </div>
+        <input type="text" class="form-control" id="order-phone" aria-label="Sizing example input"
+               aria-describedby="inputGroup-sizing-default">
+    </div>
+    <button onclick="order()" type="button" class="btn btn-primary">주문하기</button>
+</div>
+
+</div>
+
+
+</body>
+</html>
+
+
+
