@@ -41,14 +41,55 @@
             text-align: center;
         }
 
-        }
         .card {
-            width: 500px;
-            height: 500px;
-            text-align: left;
+            /*width: 500px;*/
+            /*height: 500px;*/
+            /*text-align: left;*/
 
         }
     </style>
+
+    <script>
+      function searchAndMakeCard(name) {
+        $.ajax({
+          url: `/videolist/${name}`,
+          method: "GET",
+          data: {},
+          success: function (response) {
+            if (response["result"] === "success") {
+              // 비우고
+              $("#card-container").empty()
+
+              // 채워넣는다
+              const video_list = response["video_list"]
+              for (let i = 0; i < video_list.length; i++) {
+                const current_video = video_list[i]
+                const card = makeCard("", "", current_video["img_src"], current_video["title"], "#")
+                $("#card-container").append(card)
+              }
+            } else {
+              alert("실패")
+            }
+          }
+        })
+        // 크롤링 요청
+        // img, title, description, link
+        // makeCard
+      }
+
+      function makeCard(comment, desc, image, title, url) {
+        return `<div class="card" style="width: 18rem;">
+                  <img src="${image}" class="card-img-top" alt="...">
+                  <div class="card-body">
+                  <h5 class="card-title">${title}</h5>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                card's content.</p>
+                <a href="${url}" class="btn btn-primary">보러가기</a>
+                  </div>
+          </div>`
+      }
+
+    </script>
 </head>
 <body>
 <div>
@@ -59,10 +100,11 @@
     </div>
     <hr>
     <div class="first-category-buttons">
-        <button type="button" class="btn btn-outline-danger">브이로그</button>
-        <button type="button" class="btn btn-outline-warning">랜선집들이</button>
-        <button type="button" class="btn btn-outline-success">플레이리스트</button>
-        <button type="button" class="btn btn-outline-info">직캠</button>
+        <button type="button" onclick="searchAndMakeCard('english+vlog')" class="btn btn-outline-danger">브이로그</button>
+        <button type="button" onclick="searchAndMakeCard('랜선집들이')" class="btn btn-outline-warning">랜선집들이</button>
+        <button type="button" onclick="searchAndMakeCard('english+vlog')" class="btn btn-outline-success">플레이리스트
+        </button>
+        <button type="button" onclick="searchAndMakeCard('english+vlog')" class="btn btn-outline-info">직캠</button>
     </div>
     <p></p>
     <div class="second-category-buttons">
@@ -72,117 +114,7 @@
         <button type="button" class="btn btn-outline-info">10만~</button>
     </div>
     <hr>
-    <div class="video-card-colums">
-        <div class="card" style="width: 18rem;">
-            <img src="..." class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                    card's content.</p>
-                <a href="#" class="btn btn-primary">보러가기</a>
-            </div>
-
-
-        </div>
-        <div class="card" style="width: 18rem;">
-            <img src="..." class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                    card's content.</p>
-                <a href="#" class="btn btn-primary">보러가기</a>
-            </div>
-
-
-        </div>
-        <div class="card" style="width: 18rem;">
-            <img src="..." class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                    card's content.</p>
-                <a href="#" class="btn btn-primary">보러가기</a>
-            </div>
-
-
-        </div>
-        <div class="card" style="width: 18rem;">
-            <img src="..." class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                    card's content.</p>
-                <a href="#" class="btn btn-primary">보러가기</a>
-            </div>
-
-
-        </div>
-        <div class="card" style="width: 18rem;">
-            <img src="..." class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                    card's content.</p>
-                <a href="#" class="btn btn-primary">보러가기</a>
-            </div>
-
-
-        </div>
-        <div class="card" style="width: 18rem;">
-            <img src="..." class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                    card's content.</p>
-                <a href="#" class="btn btn-primary">보러가기</a>
-            </div>
-
-
-        </div>
-        <div class="card" style="width: 18rem;">
-            <img src="..." class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                    card's content.</p>
-                <a href="#" class="btn btn-primary">보러가기</a>
-            </div>
-
-
-        </div>
-        <div class="card" style="width: 18rem;">
-            <img src="..." class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                    card's content.</p>
-                <a href="#" class="btn btn-primary">보러가기</a>
-            </div>
-
-
-        </div>
-        <div class="card" style="width: 18rem;">
-            <img src="..." class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                    card's content.</p>
-                <a href="#" class="btn btn-primary">보러가기</a>
-            </div>
-
-
-        </div>
-        <div class="card" style="width: 18rem;">
-            <img src="..." class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                    card's content.</p>
-                <a href="#" class="btn btn-primary">보러가기</a>
-            </div>
-
-
-        </div>
+    <div id="card-container" class="card-colums">
     </div>
 </div>
 </div>
